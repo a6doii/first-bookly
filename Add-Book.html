@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add-Book</title>
+    <link rel="stylesheet" href="addBookCSS.css">
+<!-- <link rel="stylesheet" href=""  media="(min-width:1000px)"> -->
+</head>
+<body class="main">
+    <div class="navbar">
+        <div class="icon">
+            <h2 class="logo">Bookly</h2>
+        </div>
+
+        <div class="menu">
+            <ul>
+                <li><a href="./home.html" id="home"class="home">HOME</a></li> 
+                <li><a href="./books.html" id="Books" class="Books">BOOKS</a></li> 
+                <li><a href="./mybooks.html" id="MyBooks" class="my-books">MY BOOKS</a></li>
+                <li><a href="./Add-Book.html" id="AddBooks" class="add-book"> ADD BOOK </a></li> 
+                <li><a href="./login.html"  id="logIn"class="log-in"> LOG IN </a></li> 
+                <li><a href="./sign-up.html" id="signUp" class="sign-up"> sign up </a></li> 
+                <li><a href="./AboutUs.html" id="AboutUs"class="aboutus"> About Us </a></li> 
+                <li><button id="LogOut" class="log-out">LOG OUT</button></li>
+                
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <h1 class="Welcome"> Welcome to our website <br><span class="logo">Bookly</span> </h1>
+                <form action="#" method="post" id="addBookForm" class="form">
+                    <h2>Add New Book</h2>
+                    <div class="A-book-name">
+                        <input type="text" placeholder="Book Name..." required>
+                        <span id="A-book-name-commint"></span>
+                    </div>
+                    <div class="A-author">
+                        <input type="text" placeholder="Book Author..." required>
+                    </div>
+                    <div class="A-book-category">
+                        <input type="text" placeholder="Book Category..." required>
+                        
+                    </div>
+                    <br>
+                    <div class="des-img-Add">
+                        
+                        <div class="A-book-description">
+                            <label for="A-descriptionInput">Description:<br><br></label>
+                            <textarea id="A-descriptionInput" name="A-descriptionInput" rows="4" cols="50" required></textarea>
+                    </div>                
+                    <div class="E-book-Image">
+                        <label for="imageInput">Select an image:</label>
+                        <input type="file" id="imageInput" name="imageInput" accept="image/*" required>
+                    </div>
+                    <span id="alert"></span>
+                    <br>
+                    <div class="E-summit">
+                        <input type="submit" class="btnn" value="Add">
+                    </div> 
+                </form>
+            </div>
+</div>
+<script>
+        
+let data = window.localStorage;
+let role=JSON.parse(data.getItem(JSON.parse(data.getItem("name"))));
+role2=role.class;
+if (JSON.parse(data.getItem("name")) === null) {
+    let parent = document.getElementsByClassName("menu")[0];
+    let link = parent.querySelectorAll("a");
+    link.forEach(item => {
+        if (!(item.id === "logIn" || item.id === "signUp")) {
+            item.style.display = "none";
+        }
+    });
+    parent.querySelector("button").style.display = "none";
+}
+else {
+    document.getElementById("signUp").style.display = "none";
+}
+// data.clear();
+// console.log(data);
+// console.log(data);
+document.getElementById("addBookForm").addEventListener("submit", function(event) {
+
+    event.preventDefault();  
+
+    let bname = document.querySelector("[placeholder='Book Name...']").value;
+    let bid = document.querySelector("[placeholder='Book Name...']").value;
+    let bauthor = document.querySelector("[placeholder='Book Author...']").value;
+    let bookCategory = document.querySelector("[placeholder='Book Category...']").value;
+    let descriptionInput = document.querySelector("textarea").value;
+    let bookImage = document.querySelector("[type='file']").files[0]; 
+    let allbooks=JSON.parse(data.getItem("all"));
+    let check=false;
+    
+for(let i=0; i<allbooks.length; i++){
+    if(allbooks[i].name === bname){ // Corrected the variable name 'element' to 'allbooks[i]'
+        event.preventDefault();
+        let commint=document.querySelector("#A-book-name-commint");
+        commint.innerHTML=`<p style="color:#c70808;font-size:12px">invalid book name</p>`;
+        check=true;
+        break;
+    }
+}
+        if(!check){
+            let commint=document.querySelector("#A-book-name-commint");
+        commint.innerHTML=``;
+        commint=document.querySelector("#alert");
+        commint.innerHTML=`<p style="color:#28a745;font-size:12px">added successfully</p>`;
+    let reader = new FileReader();
+    reader.onload = function(event) {
+        let imageData = event.target.result; 
+        let book = {
+            name: bname,
+            id: bid,
+            author: bauthor,
+            category: bookCategory,
+            des: descriptionInput,
+            img: imageData 
+        };
+        let arr=data.getItem("all");
+        console.log(arr);
+        arr=JSON.parse(arr);
+        arr.push(book);
+        data.setItem("all",JSON.stringify(arr));
+        console.log(data);
+    };
+    reader.readAsDataURL(bookImage);
+    console.log(data);}
+}); 
+
+</script>
+</body>
+</html>

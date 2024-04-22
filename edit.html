@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Books</title>
+<link rel="stylesheet" href="edit-mobile.css" media="(max-width:999px)">
+<link rel="stylesheet" href="edit.css"  media="(min-width:1000px)">
+</head>
+<body class=main>
+    <div class="navbar">
+        <div class="icon">
+            <h2 class="logo">Bookly</h2>
+        </div>
+
+        <div class="menu">
+            <ul>
+                <li><a href="./home.html" id="home"class="home">HOME</a></li> 
+                <li><a href="./books.html" id="Books" class="Books">BOOKS</a></li> 
+                <li><a href="./mybooks.html" id="MyBooks" class="my-books">MY BOOKS</a></li>
+                <li><a href="./Add-Book.html" id="AddBooks" class="add-book"> ADD BOOK </a></li> 
+                <li><a href="./login.html"  id="logIn"class="log-in"> LOG IN </a></li> 
+                <li><a href="./sign-up.html" id="signUp" class="sign-up"> sign up </a></li> 
+                <li><a href="./AboutUs.html" id="AboutUs"class="aboutus"> About Us </a></li> 
+                <li><button id="LogOut" class="log-out">LOG OUT</button></li>
+                
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <h1 class="Welcome"> Welcome to our website <br><span class="logo">Bookly</span> </h1>
+        <form action="#" method="post" class="form">
+            <h2>Edit</h2>
+            <div class="E-book-name" >
+                    <input type="text" name="old-book-name" id ="ObookName" placeholder="Old Book Name...">
+            </div>
+            <div class="E-book-name" >
+                    <input type="text" name="new-book-name" id ="NbookName" placeholder="New Book Name..."  >
+            </div>
+            <div class="E-author">
+                    <input type="text" name="new-name" id="author" placeholder="Book Author..."  >
+            </div>
+            <div class="E-book-category">
+                    <input type="text" name="Categories" id="category"placeholder="Book Category..."  >
+                </div>
+                <br>
+                <div class="E-book-description">
+                    <label for="E-book-description">Description:<br><br></label>
+                    <textarea id="E-descriptionInput" name="descriptionInput"></textarea>                
+                </div>
+                <br>
+                <div class="E-book-Image">
+                    <label for="imageInput">Select an image:</label><br>
+                    <input type="file" id="imageInput" name="imageInput" accept="image/*"  >
+                </div>
+                <br>
+                <div class="E-summit">
+                    <input type="submit" value="Edit" class="btnn">
+                </div>       
+        </form>
+        <span id="alert"></span>
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+        const form = document.querySelector('.form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const oldBookName = document.getElementById('ObookName').value;
+            const newBookName = document.getElementById('NbookName').value;
+            const author = document.getElementById('author').value;
+            const category = document.getElementById('category').value;
+            const description = document.getElementById('E-descriptionInput').value;
+            const image = document.getElementById('imageInput').files[0];
+            if (!oldBookName || !newBookName || !author || !category || !description || !image) {
+                window.alert('Please fill out all fields.');
+                return; 
+            }
+            let arrbooks = JSON.parse(localStorage.getItem('all'));
+            const bookIndex = arrbooks.findIndex(book => book.name === oldBookName);
+            if (bookIndex === -1) {
+                document.getElementById('alert').textContent = 'Book not found.';
+                return;         }
+            const reader = new FileReader();
+            reader.onload = function() {
+                arrbooks[bookIndex] = {
+                    name: newBookName,
+                    author: author,
+                    category: category,
+                    des: description,
+                    img: reader.result
+                };
+                localStorage.setItem('all', JSON.stringify(arrbooks));
+                window.alert('Book updated successfully.');
+                form.reset();
+            };
+            reader.readAsDataURL(image);
+        });
+    });
+    
+        </script>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home Page </title>
+    <link rel="stylesheet" href="homecss.css">
+</head>
+<body>
+    <div class="main">
+        <div class="navbar">
+            <div class="icon">
+                <h2 class="logo">Bookly</h2>
+            </div>
+
+            <div class="menu">
+                <ul>
+                    <li><a href="./home.html" id="home"class="home">HOME</a></li> 
+                    <li><a href="./books.html" id="Books" class="Books">BOOKS</a></li> 
+                    <li><a href="./mybooks.html" id="MyBooks" class="my-books">MY BOOKS</a></li>
+                    <li><a href="./Add-Book.html" id="AddBooks" class="add-book"> ADD BOOK </a></li> 
+                    <li><a href="./login.html"  id="logIn"class="log-in"> LOG IN </a></li> 
+                    <li><a href="./sign-up.html" id="signUp" class="sign-up"> sign up </a></li> 
+                    <li><a href="./AboutUs.html" id="AboutUs"class="aboutus"> About Us </a></li> 
+                    <li><button id="LogOut" class="log-out">LOG OUT</button></li>
+                    
+                </ul>
+            </div>
+            <section class="home" id="home">
+                <div class="home-content">
+                    <div class="content">
+                        <p class="text1" >LET'S MAKE THE BEST INVESTMENT</p>
+                        <h2 class="text2">Read More <br> And Make Success <br> The Result Of Perfection</h2>
+                    </div>
+
+                    <div class="image">
+                        <img src="home.png" alt="">
+                    </div>
+                </div>
+            </section>
+
+        </div> 
+
+    </div>
+    <script>
+        let data = window.localStorage;
+        // data.clear();
+if (JSON.parse(data.getItem("name")) === null) {
+    let parent = document.getElementsByClassName("menu")[0];
+    let link = parent.querySelectorAll("a");
+    link.forEach(item => {
+        if (!(item.id === "logIn" || item.id === "signUp")) {
+            item.style.display = "none";
+        }
+    });
+    parent.querySelector("button").style.display = "none";
+}
+else {
+    document.getElementById("signUp").style.display = "none";
+}
+let role = JSON.parse(data.getItem(JSON.parse(data.getItem("name"))));
+console.log(role);
+if (role !== null) {
+    let role2 = role.class;
+    let add = document.getElementsByClassName("add-book")[0];
+    if (role2 === "user") {
+        add.style.display = "none";
+    }
+    let btn = document.querySelector(".log-out");
+    btn.onclick = function () {
+        role.loged = false;
+        let val = JSON.parse(data.getItem("name"));
+        data.setItem(val, JSON.stringify(role));
+        console.log(data);
+        chek = false;
+        document.getElementsByClassName("log-in")[0].style.display = "none";
+        location.reload();
+        window.location.href = "./login.html";
+    };
+    if (role.loged === true) {
+        document.getElementsByClassName("log-in")[0].style.display = "none";
+    } else {
+        document.getElementsByClassName("log-out")[0].style.display = "none";
+    }
+} else {
+    console.log("lol");
+    let mb = document.querySelector(".Books");
+    let mb2 = document.querySelector(".my-books");
+    let mb3 = document.querySelector(".add-book"); 
+    let mb4 = document.querySelector(".log-out");
+    let mb5 = document.querySelector(".home");
+    let mb6 = document.querySelector(".log-in");
+    let mb7 = document.querySelector(".sign-up");
+    let mb8 = document.querySelector(".aboutus");
+    mb2.style.display = "none";
+    mb3.style.display = "none";
+    mb4.style.display = "none";
+}
+
+    </script>
+</body>
+</html>

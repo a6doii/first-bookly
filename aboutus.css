@@ -1,0 +1,343 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background: linear-gradient(#000000bb , rgba(62, 58, 58, 0.822),#000000bb );
+}
+
+main {
+    width: 100%;
+    /* background: rgba(194, 189, 189, 0.846); */
+    background-position: center;
+    background-size: cover;
+    height: auto;
+}
+
+.navbar {
+    width: 1200px;
+    height: 75px;
+    margin: auto;
+
+}
+
+.icon {
+    width: 200px;
+    float: left;
+    height: 70px;
+}
+
+.logo {
+    color: #c70808;
+    font-size: 35px;
+    font-family: Arial;
+    padding-left: 5px;
+    float: left;
+    padding-top: 10px;
+    margin-top: 5px
+}
+
+.menu {
+    width: 370px;
+    float: left;
+    height: 70px;
+}
+
+.menu ul {
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.aboutus{
+    padding-right: 10px;
+    position: absolute;
+    right: 630px;
+    top: 35px;
+}
+.log-out{
+  padding-right: 10px;
+  position: absolute;
+  right: 520px;
+  top: 35px;
+}
+
+.menu ul li {
+    list-style: none;
+    margin-left: 50px;
+    margin-top: 27px;
+    font-size: 14px;
+}
+
+
+.menu ul li a , button{
+    background: none;
+    border: none;
+    text-decoration: none;
+    color: #fff;
+    font-family: Arial;
+    font-weight: bold;
+    transition: 0.4s ease-in-out;
+}
+
+.menu ul li a:hover {
+    color: #c70808;
+}
+
+.search {
+    width: 350px;
+    float: left;
+    margin-left: 250px;
+    margin-top: 10px;
+}
+
+.srch {
+    font-family: 'Times New Roman';
+    width: 200px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid #c70808;
+    margin-top: 13px;
+    color: #fff;
+    border-right: none;
+    font-size: 16px;
+    float: left;
+    padding: 10px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.btn {
+    width: 100px;
+    height: 40px;
+    background: #c70808;
+    border: 2px solid #c70808;
+    margin-top: 13px;
+    color: #fff;
+    font-size: 15px;
+    border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+
+.btn:hover {
+    color: #000;
+}
+
+.btn:focus {
+    outline: none;
+}
+
+.srch:focus {
+    outline: none;
+}
+
+.slideshow-container {
+  position: relative;
+  max-width: 1000px;
+  margin: auto;
+  transform: translateY(-70px);
+  animation: fadeInUp 2s forwards;
+}
+
+.mySlides {
+  display: none;
+  animation: fade 5s infinite;
+}
+
+.fade {
+  animation-name: fade;
+  animation-duration: 7s;
+}
+
+.quote {
+  position: absolute;
+  bottom: 0;
+  width: 920px;
+  text-align: center;
+  font-size: 20px;
+  color: white;
+  padding-left: 70px ;
+  font-weight:bold ;
+  font-size: 25px;
+}
+
+.mySlides img{
+    padding-top: 50px ;
+    padding-left: 50px;
+    filter: blur(1.5px);
+    width: 970px;
+    height: 350px;
+    background-size: cover;
+}
+
+.our-story {
+    padding: 30px;
+    font-size: 30px;
+    color:#c70808;
+    margin-top: 70px;
+    transform: translateY(-70px);
+    animation: fadeInUp 2s forwards;
+}
+
+ul.our-story2  {
+    padding-left:  100px; 
+    list-style-type: disc;
+    font-size: 22px ;
+    color: rgb(255, 255, 255);
+    width: 700px;
+    transform: translateY(-70px);
+    animation: fadeInUp 2s forwards;
+}
+
+
+.things1 {
+    padding: 30px;
+    margin-top: 20px;
+    color: #c70808;
+    font-size: 30px;
+    transform: translateY(-70px);
+    animation: fadeInUp 2s forwards;
+}
+
+
+ul.thingss {
+    padding-left:  100px; 
+    list-style-type: disc;
+    font-size: 22px ;
+    color: rgb(255, 255, 255);
+    width: 700px;
+    transform: translateY(-70px);
+    animation: fadeInUp 2s forwards;
+}
+
+.future1{
+    padding: 30px;
+    margin-top: 20px;
+    color: #c70808;
+    font-size: 30px;
+    transform: translateY(-70px);
+    animation: fadeInUp 2s forwards;
+}
+
+ul.futre12 {
+    padding-left:  100px; 
+    list-style-type: disc;
+    font-size: 22px ;
+    color: rgb(255, 255, 255);
+    width: 700px;
+    transform: translateY(-70px);
+    animation: fadeInUp 2s forwards;
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Poppins;
+}
+.home-container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: #0c52a1; */
+}
+.profile-card{
+    position: relative;
+    width: 220px;
+    height: 220px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 50%;
+    box-shadow: -5px 8px 45px rgba(51, 51, 51, 0.126);
+    transition: all .4s;
+    margin: 0 20px;
+    margin-bottom: 40px ;
+    transform: translateY(20px); /* Move it down slightly */
+    animation: fadeInUp 1s ease forwards; /* Apply fadeInUp animation *//
+}
+.profile-card:hover{
+    border-radius: 10px;
+    height: 260px;
+}
+.profile-card .img{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.profile-card:hover img{
+    border-radius: 10px;
+    transform: translateY(-70px);
+}
+.img img{
+    object-fit: fill;
+    width: 100%;
+    border-radius: 50%;
+    transition: all .5s;
+    z-index: 99;
+}
+.caption{
+    text-align: center;
+    transform: translateY(-90px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all .5s;
+}
+.profile-card:hover .caption{
+    opacity: 1;
+    pointer-events: all;
+}
+.caption h3{
+    font-size: 21px;
+    color: #0c52a1;
+    font-weight: 600;
+}
+.caption p{
+    font-size: 15px;
+    font-weight: 500;
+    margin: 2px 0 12px 0;
+}
+.caption .social-links i{
+    font-size: 21px;
+    margin: 0 3px;
+    cursor: pointer;
+    color: #333;
+    transition: all .4s;
+}
+.caption .social-links i:hover{
+    color: #0c52a1;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    text-align: center;
+    color: #c70808 ;
+    padding-top: 100px ;
+    font-size: 50px;
+    transform: translateY(20px);
+    animation:fadeInUp 1s ease forwards ;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+

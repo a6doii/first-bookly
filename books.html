@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Books </title>
+    <link rel="stylesheet" href="books.css">
+    
+</head>
+<body>
+    <div class="main"> 
+        <div class="navbar">
+            <div class="icon">
+                <h2 class="logo">Bookly</h2>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="./home.html" id="home"class="home">HOME</a></li> 
+                    <li><a href="./books.html" id="Books" class="Books">BOOKS</a></li> 
+                    <li><a href="./mybooks.html" id="MyBooks" class="my-books">MY BOOKS</a></li>
+                    <li><a href="./Add-Book.html" id="AddBooks" class="add-book"> ADD BOOK </a></li> 
+                    <li><a href="./login.html"  id="logIn"class="log-in"> LOG IN </a></li> 
+                    <li><a href="./sign-up.html" id="signUp" class="sign-up"> sign up </a></li> 
+                    <li><a href="./AboutUs.html" id="AboutUs"class="aboutus"> About Us </a></li> 
+                    <li><button id="LogOut" class="log-out">LOG OUT</button></li>
+                    
+                </ul>
+            </div>
+            <div class="search">
+                <input class="srch" type="search" name="" placeholder="Type book name,author,category ">
+                <a href="#"> <button class="btn">Search</button></a> 
+            </div>
+        </div>  
+            <script>
+        let data = window.localStorage;
+
+        let role=JSON.parse(data.getItem(JSON.parse(data.getItem("name"))));
+        role2=role.class;
+        let add=document.getElementsByClassName("add-book")[0];
+        if (JSON.parse(data.getItem("name")) === null) {
+    let parent = document.getElementsByClassName("menu")[0];
+    let link = parent.querySelectorAll("a");
+    link.forEach(item => {
+        if (!(item.id === "logIn" || item.id === "signUp")) {
+            item.style.display = "none";
+        }
+    });
+    parent.querySelector("button").style.display = "none";
+}
+else {
+    document.getElementById("signUp").style.display = "none";
+}
+        if(role2==="user"){
+            add.style.display="none";
+            
+        }
+        let btn=document.querySelector(".log-out");
+        btn.onclick=function(){
+            role.loged=false;
+            let val=JSON.parse(data.getItem("name"));
+            data.setItem(val,JSON.stringify(role));
+            console.log(data);
+            chek=false;
+            document.getElementsByClassName("log-in")[0].style.display="none";
+            location.reload();
+            window.location.href="./login.html";
+        }
+        if(role.loged===true){
+            document.getElementsByClassName("log-in")[0].style.display="none";
+            document.getElementsByClassName("log-out")[0].style.display="block";
+        }
+        else{
+            document.getElementsByClassName("log-out")[0].style.display="none";
+            document.getElementsByClassName("log-in")[0].style.display="block";
+        }
+            let inbook=JSON.parse(data.getItem("all"));
+            let contaner = document.createElement("div");
+            document.querySelector(".main").appendChild(contaner);
+            contaner.className = "book-container";
+            contaner.className = "book-container";
+            document.querySelector(".main").appendChild(contaner);
+            for(let i = 0; i< inbook.length ; i++){
+                let tmp = `
+                        <div class="book ${inbook[i].category}" id="${inbook[i].name}">
+                        <div class="book-inner">
+                            <div class="book-front">
+                            <img src= ${inbook[i].img}  alt="Book 1">
+                            </div>
+                            <div class="book-back">
+                            <p class="author">${inbook[i].author}</p>
+                            <p class="description">
+                                ${inbook[i].des}
+                                </p>
+                            <p class=category style="display:none">${inbook[i].category}</p>
+                            <div class="button-container">
+                                <button id="button1" class="borrow-button" >Borrow</button>
+                                <button id="button2" class="cancel-button" >unBorrow</button>
+                                <a href="Edit.html"class="Edit"> <button id="button2">Edit</button></a>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                        `;
+                contaner.insertAdjacentHTML("beforeend", tmp);
+            }
+            let buttons = document.querySelectorAll(".book");
+
+if (!role.loged) {
+    buttons.forEach(book => {
+        book.querySelector(".button-container").style.display = "none";
+    });
+} 
+else {
+    if(role.class==="user"){
+        buttons.forEach(book=>{
+            book.querySelector(".Edit").style.display="none"
+        })
+    }
+    buttons.forEach(bok => {
+        let bookId = bok.id;
+        let borrowed = false;
+        role.books.forEach(item => {
+            if (item.name === bookId) {
+                borrowed = true;
+            }
+        });
+        let borrowButton = bok.querySelector(".borrow-button");
+        let cancelButton = bok.querySelector(".cancel-button");
+
+        if (borrowed) {
+            borrowButton.style.display = "none";
+            cancelButton.style.display = "block";
+        } else {
+            borrowButton.style.display = "block";
+            cancelButton.style.display = "none";
+        }
+
+    });
+}
+let Bbuttons=document.querySelectorAll(".borrow-button");
+Bbuttons.forEach(button=>{
+    button.onclick=function(){
+        let boBook=button.parentElement.parentElement.parentElement.parentElement;
+        let arrbooks=JSON.parse(data.getItem("all"));
+
+        arrbooks.forEach(bo=>{
+                if(boBook.id===bo.name){
+                
+                role.books.push(bo);
+            }
+            })
+            let ch=boBook.querySelector(".borrow-button");
+                ch.style.display="none";
+                let ch2=boBook.querySelector(".cancel-button");
+                ch2.style.display="block";
+                let name=JSON.parse(data.getItem("name"));
+                data.setItem(name,JSON.stringify(role));
+                console.log(role.books);
+    }
+})
+let Cbuttons=document.querySelectorAll(".cancel-button");
+Cbuttons.forEach(button=>{
+    button.onclick=function(){
+        let boBook=button.parentElement.parentElement.parentElement.parentElement;
+        let arrbooks=JSON.parse(data.getItem("all"));
+
+        arrbooks.forEach(bo=>{
+                if(boBook.id===bo.name){
+                    
+                role.books=role.books.filter(item=>{
+                    return item.name!==bo.name;
+                })
+                
+            }
+            })
+            let ch=boBook.querySelector(".cancel-button");
+                ch.style.display="none";
+                let ch2=boBook.querySelector(".borrow-button");
+                ch2.style.display="block";
+                let name=JSON.parse(data.getItem("name"));
+                data.setItem(name,JSON.stringify(role));
+    }
+    
+})
+document.querySelector(".btn").addEventListener("click", function() {
+    let search = document.querySelector(".srch").value.toLowerCase(); 
+    let buttons = document.querySelectorAll(".book");
+    buttons.forEach(butt => {
+        let bookName = butt.id.toLowerCase();
+        let author = butt.querySelector(".author").textContent.toLowerCase();
+        let category = butt.querySelector(".category").textContent.toLowerCase();
+        console.log(author);
+        console.log(category);
+        if (bookName.includes(search) || author.includes(search) || category.includes(search)) {
+            butt.style.display = "block";
+        } else {
+            butt.style.display = "none";
+        }
+    });
+});
+</script>     
+            </div>
+
+    </div>
+</body>
+</html>
